@@ -20,17 +20,17 @@ void draw() {
   background(cream);
 
   //buttons
-  tactile(200,500,50);
+  tactile(200,300,450,550);
   fill(lightBrown);
-  circle(200, 500, 100);
+  rect(200,450,100,100);
 
-  tactile(400,500,50);
+  tactile(350,450,450,550);
   fill(mediumBrown);
-  circle(400, 500, 100);
+  rect(350,450,100,100);
 
-  tactile(600,500,50);
+  tactile(500,600,450,550);
   fill(darkBrown);
-  circle(600, 500, 100);
+  rect(500,450,100,100);
 
   //indicator
   stroke(darkestBrown);
@@ -38,8 +38,8 @@ void draw() {
   rect(200, 50, 400, 350);
 }
 
-void tactile(int x,int y, int r){
-  if(dist(x,y,mouseX,mouseY)<r){
+void tactile(int x,int y, int r,int a){
+  if(mouseX>x && mouseX<y && mouseY>r && mouseY<a){
     stroke(white);
   }else{
     stroke(darkestBrown);
@@ -49,15 +49,15 @@ void tactile(int x,int y, int r){
   
 void mouseReleased() {
   //lighbrown button
-  if (dist(200, 500, mouseX, mouseY)<50) {
+  if (mouseX>200 && mouseX<300 && mouseY>450 && mouseY<550) {
     selectedColor=lightBrown;
   }
   //mediumbr button 
-  if (dist(400, 500, mouseX, mouseY)<50) {
+  if (mouseX>350 && mouseX<450 && mouseY>450 && mouseY<550) {
     selectedColor=mediumBrown;
   }
   //darkbrowon
-  if (dist(600, 500, mouseX, mouseY)<50) {
+  if (mouseX>500 && mouseX<600 && mouseY>450 && mouseY<550) {
     selectedColor=darkBrown;
   }
 }
