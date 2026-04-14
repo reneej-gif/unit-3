@@ -11,18 +11,24 @@ float r;
 //varialbes fr color selection
 color selectedColor;
 
+PImage fish;
+boolean fishOn; //true or false
+
 void setup() {
   size (800, 600);
   strokeWeight(2);
   background(white);
   selectedColor=black;
   sliderY=300;
+  fish = loadImage("so.png");
+  fishOn = false;
 }
 
 void draw() {
+  strokeWeight(2);
   //sidebar thing
   noStroke();
-  fill(160);
+  fill(100);
   rect(0, 0, 140, 600);
   stroke(0);
 
@@ -44,14 +50,43 @@ void draw() {
   fill(0);
   stroke(25);
   line(70, 250, 70, 400);
-  tactile(70, sliderY);
-  circle(70, sliderY, 20);
+  circleButton(black,70,sliderY,20);
+  
+
+  //stamp
+  tactile2(20,420,40,40);
+  strokeWeight(1);
+  rect(20, 420, 40, 40);
+  image(fish, 20, 420, 40, 40);
 }
 
+void mouseDragged() {
+  controlslider();
+  if (mouseX > 140) {
+    stroke(selectedColor);
+    strokeWeight(r);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+  
+  if(fishOn == false){
+    //squiggly line
+    strokeWeight(5);
+    stroke(black);
+    line(pmouseX,pmouseY,mouseX,mouseY);
+  }else{
+    //draw 
+    image(fish, mouseX,mouseY,100,100);
+  }
+}
 
 void mousePressed() {
   controlslider();
-  line(pmouseX, pmouseY, mouseX, mouseY);
+
+  if (mouseX > 140) {
+    stroke(selectedColor);
+    strokeWeight(r);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
 }
 
 void controlslider() {
@@ -59,7 +94,7 @@ void controlslider() {
     sliderY=mouseY;
   }
 }
-void circleButton(color a, int x, int y, int r) {
+void circleButton(color a, int x, float y, float r) {
   tactile(x, y);
   fill(a);
   circle(x, y, r);
@@ -71,6 +106,15 @@ void tactile(int x, float y) {
     stroke(black);
   }
 }
+
+void tactile2(int x, int y, int w, int h) {
+  if (mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h) {
+    fill(255, 0, 0);
+  } else {
+    fill(255);
+  }
+}
+
 void mouseReleased() {
   if (dist(40, 40, mouseX, mouseY)<20) {
     selectedColor = red;
@@ -90,11 +134,6 @@ void mouseReleased() {
   if (dist(100, 140, mouseX, mouseY)<20) {
     selectedColor=black;
   }
-}
-void mouseDragged() {
-  controlslider();
-
-  if (mouseX > 140) {
-    line(pmouseX, pmouseY, mouseX, mouseY);
-  }
+  //drawstamp thing
+  //if(
 }
