@@ -10,9 +10,11 @@ float r;
 
 //varialbes fr color selection
 color selectedColor;
-
+//images
 PImage fish;
+PImage ph;
 boolean fishOn; //true or false
+boolean phOn;
 
 void setup() {
   size (800, 600);
@@ -22,6 +24,8 @@ void setup() {
   sliderY=300;
   fish = loadImage("so.png");
   fishOn = false;
+  ph = loadImage("ph.png");
+  phOn=false;
 }
 
 void draw() {
@@ -30,7 +34,7 @@ void draw() {
   noStroke();
   fill(100);
   rect(0, 0, 140, 600);
-  stroke(0);
+
 
   //buttons
   circleButton(red, 40, 40, 40);
@@ -50,42 +54,47 @@ void draw() {
   fill(0);
   stroke(25);
   line(70, 250, 70, 400);
-  circleButton(black,70,sliderY,20);
-  
+  circleButton(black, 70, sliderY, 20);
 
-  //stamp
-  tactile2(20,420,40,40);
-  strokeWeight(1);
-  rect(20, 420, 40, 40);
+  //stamps
+  fishOnOff();
+  rectButton(20, 420, 40, 40);
   image(fish, 20, 420, 40, 40);
-}
 
-void mouseDragged() {
-  controlslider();
-  if (mouseX > 140) {
-    stroke(selectedColor);
-    strokeWeight(r);
-    line(pmouseX, pmouseY, mouseX, mouseY);
-  }
-  
-  if(fishOn == false){
-    //squiggly line
-    strokeWeight(5);
-    stroke(black);
-    line(pmouseX,pmouseY,mouseX,mouseY);
-  }else{
-    //draw 
-    image(fish, mouseX,mouseY,100,100);
-  }
+  rectButton(80, 420, 40, 40);
+  image(ph, 84, 420, 33, 40);
 }
 
 void mousePressed() {
   controlslider();
 
   if (mouseX > 140) {
-    stroke(selectedColor);
-    strokeWeight(r);
-    line(pmouseX, pmouseY, mouseX, mouseY);
+    if (fishOn == true) {
+      //draw stamp
+      image(fish, mouseX, mouseY, 100, 100);
+    } else if (phOn == true) {
+      image(ph, mouseX, mouseY, 100, 100);
+    } else {
+      stroke(selectedColor);
+      strokeWeight(r);
+      line(pmouseX, pmouseY, mouseX, mouseY);
+    }
+  }
+}
+void mouseDragged() {
+  controlslider();
+
+  if (mouseX > 140) {
+    if (fishOn == true) {
+      //draw stamp
+      image(fish, mouseX, mouseY, 100, 100);
+    } else if (phOn==true) {
+      image(ph, mouseX, mouseY, 100, 100);
+    } else {
+      stroke(selectedColor);
+      strokeWeight(r);
+      line(pmouseX, pmouseY, mouseX, mouseY);
+    }
   }
 }
 
@@ -106,7 +115,10 @@ void tactile(int x, float y) {
     stroke(black);
   }
 }
-
+void rectButton(int x, int y, int w, int h) {
+  tactile2(x, y, w, h);
+  rect(x, y, w, h);
+}
 void tactile2(int x, int y, int w, int h) {
   if (mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h) {
     fill(255, 0, 0);
@@ -134,6 +146,24 @@ void mouseReleased() {
   if (dist(100, 140, mouseX, mouseY)<20) {
     selectedColor=black;
   }
-  //drawstamp thing
-  //if(
+  //drawstamp
+  if (mouseX > 20 && mouseX < 60 && mouseY > 420 && mouseY < 460) {
+    fishOn = !fishOn;
+    phOn = false;
+  }
+
+  //benzen
+  if (mouseX > 80 && mouseX < 120 && mouseY > 420 && mouseY < 460) {
+    phOn = !phOn;
+    fishOn = false;
+  }
+}
+void fishOnOff() {
+  if (fishOn==true) {
+    stroke(green);
+    strokeWeight(5);
+  } else {
+    stroke(black);
+    strokeWeight(1);
+  }
 }
