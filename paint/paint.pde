@@ -35,7 +35,6 @@ void draw() {
   fill(100);
   rect(0, 0, 140, 600);
 
-
   //buttons
   circleButton(red, 40, 40, 40);
   circleButton(orange, 40, 90, 40);
@@ -61,8 +60,20 @@ void draw() {
   rectButton(20, 420, 40, 40);
   image(fish, 20, 420, 40, 40);
 
+  stroke(0);
+  strokeWeight(1);
+  phOnOff();
   rectButton(80, 420, 40, 40);
   image(ph, 84, 420, 33, 40);
+
+  //clear save laod
+  fill(black);
+  strokeWeight(2);
+  rectButton2(30, 480, 80, 20);
+  rectButton2(30, 510, 80, 20);
+  rectButton2(30, 540, 80, 20);
+  fill(white);
+  text("NEW", 60, 493);
 }
 
 void mousePressed() {
@@ -119,11 +130,22 @@ void rectButton(int x, int y, int w, int h) {
   tactile2(x, y, w, h);
   rect(x, y, w, h);
 }
+void rectButton2(int x, int y, int w, int h) {
+  tactile3(x, y, w, h);
+  rect(x, y, w, h);
+}
 void tactile2(int x, int y, int w, int h) {
   if (mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h) {
     fill(255, 0, 0);
   } else {
     fill(255);
+  }
+}
+void tactile3(int x, int y, int w, int h) {
+  if (mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h) {
+    stroke(white);
+  } else {
+    stroke(black);
   }
 }
 
@@ -157,9 +179,24 @@ void mouseReleased() {
     phOn = !phOn;
     fishOn = false;
   }
+  //clear or new btuton
+  if(mouseX>30 && mouseX<110 && mouseY>480 && mouseY<500){
+    fill(white);
+    noStroke();
+    rect(140,0,660,600);
+  }
 }
 void fishOnOff() {
   if (fishOn==true) {
+    stroke(green);
+    strokeWeight(5);
+  } else {
+    stroke(black);
+    strokeWeight(1);
+  }
+}
+void phOnOff() {
+  if (phOn==true) {
     stroke(green);
     strokeWeight(5);
   } else {
