@@ -74,6 +74,8 @@ void draw() {
   rectButton2(30, 540, 80, 20);
   fill(white);
   text("NEW", 60, 493);
+  text("LOAD", 57, 525);
+  text("SAVE", 57, 555);
 }
 
 void mousePressed() {
@@ -180,12 +182,29 @@ void mouseReleased() {
     fishOn = false;
   }
   //clear or new btuton
-  if(mouseX>30 && mouseX<110 && mouseY>480 && mouseY<500){
+  if (mouseX>30 && mouseX<110 && mouseY>480 && mouseY<500) {
     fill(white);
     noStroke();
-    rect(140,0,660,600);
+    rect(140, 0, 660, 600);
+  }
+  //load button
+  if (mouseX>30 && mouseX<110 && mouseY>510 && mouseY<530) {
+    selectInput("Pick an image to load", "openImage");
+  }
+  //save button
+  if (mouseX>30 && mouseX<110 && mouseY>540 && mouseY<560) {
+    selectOutput("Choose a name for your new image file", "saveImage");
   }
 }
+
+void saveImage(File f) {
+  if (f !=null) {
+    PImage canvas = get(140, 0, width-140, height);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+
 void fishOnOff() {
   if (fishOn==true) {
     stroke(green);
