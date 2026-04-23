@@ -200,10 +200,20 @@ void mouseReleased() {
 void saveImage(File f) {
   if (f !=null) {
     PImage canvas = get(140, 0, width-140, height);
-    canvas.save(f.getAbsolutePath());
+    canvas.save(f.getAbsolutePath()+".png");
   }
 }
 
+void openImage(File f){
+  if(f != null){
+    int n=0;
+    while (n<100){
+      PImage pic = loadImage(f.getPath());
+      image(pic, 140, 0);
+      n=n+1;
+    }
+  }
+}
 
 void fishOnOff() {
   if (fishOn==true) {
