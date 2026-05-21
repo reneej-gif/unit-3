@@ -84,9 +84,9 @@ void mousePressed() {
   if (mouseX > 140) {
     if (fishOn == true) {
       //draw stamp
-      image(fish, mouseX, mouseY, 100, 100);
+      image(fish, mouseX-(r*10)/2, mouseY-(r*10)/2, r*10,r*10);
     } else if (phOn == true) {
-      image(ph, mouseX, mouseY, 100, 100);
+      image(ph, mouseX-(r*10)/2, mouseY-(r*10)/2, r*10, r*10);
     } else {
       stroke(selectedColor);
       strokeWeight(r);
@@ -100,9 +100,9 @@ void mouseDragged() {
   if (mouseX > 140) {
     if (fishOn == true) {
       //draw stamp
-      image(fish, mouseX, mouseY, 100, 100);
+      image(fish, mouseX-(r*10)/2, mouseY-(r*10)/2, r*10, r*10);
     } else if (phOn==true) {
-      image(ph, mouseX, mouseY, 100, 100);
+      image(ph, mouseX-(r*10)/2, mouseY-(r*10)/2, r*10, r*10);
     } else {
       stroke(selectedColor);
       strokeWeight(r);
